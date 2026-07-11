@@ -1,329 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>The Vault</title>
+<title>Da Hood Shop</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
-background:#000;
-color:white;
-overflow:hidden;
+    margin:0;
+    background:#0f0f0f;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
-.page{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-transition:.5s;
-}
-
-.hidden{
-opacity:0;
-pointer-events:none;
-transform:scale(.95);
-}
-
-.logo{
-width:220px;
-margin-bottom:20px;
+header{
+    text-align:center;
+    padding:50px;
+    background:#171717;
 }
 
 h1{
-font-size:60px;
-letter-spacing:5px;
-margin-bottom:35px;
-text-shadow:0 0 20px white;
+    font-size:45px;
+    color:#00ffae;
 }
 
-.neonBtn{
-
-padding:16px 55px;
-border-radius:50px;
-border:2px solid white;
-background:transparent;
-color:white;
-font-size:22px;
-cursor:pointer;
-transition:.3s;
-
+.discord{
+    display:inline-block;
+    margin-top:20px;
+    padding:15px 35px;
+    background:#5865F2;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.3s;
 }
 
-.neonBtn:hover{
-
-box-shadow:
-0 0 10px white,
-0 0 25px white,
-0 0 60px white;
-
+.discord:hover{
+    transform:scale(1.05);
 }
 
-.games{
-
-display:flex;
-gap:45px;
-flex-wrap:wrap;
-justify-content:center;
-
+.container{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:40px;
 }
 
 .card{
-
-width:300px;
-height:180px;
-overflow:hidden;
-border:3px solid white;
-border-radius:18px;
-cursor:pointer;
-transition:.35s;
-
+    background:#1b1b1b;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
 }
 
 .card:hover{
-
-box-shadow:
-0 0 10px white,
-0 0 25px white,
-0 0 45px white;
-
-transform:scale(1.04);
-
+    transform:translateY(-8px);
 }
 
 .card img{
-
-width:100%;
-height:100%;
-object-fit:cover;
-
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
-.infoImg{
-
-width:650px;
-max-width:90%;
-border:2px solid white;
-border-radius:18px;
-margin-bottom:30px;
-
+.info{
+    padding:20px;
 }
 
-.instructions{
-
-font-size:24px;
-text-align:center;
-margin-bottom:35px;
-line-height:45px;
-
+.price{
+    color:#00ff99;
+    font-size:22px;
+    font-weight:bold;
 }
 
+footer{
+    text-align:center;
+    padding:30px;
+    color:gray;
+}
 </style>
 
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<header>
 
-<!-- HOME -->
+<h1>🔥 Da Hood Shop 🔥</h1>
 
-<div id="home" class="page">
+<p>Trusted Seller • Fast Delivery • Robux Only</p>
 
-<img class="logo" src="https://i.ibb.co/r2cmH8r5/5-CFD85-E5-71-A2-4179-B126-9-E9-A5-E98399-E.png">
+<a class="discord" href="https://discord.gg/TONLIEN" target="_blank">
+Rejoindre le Discord
+</a>
 
-<h1>The Vault</h1>
+</header>
 
-<button class="neonBtn" onclick="openGames()">Continue</button>
+<div class="container">
+
+<div class="card">
+<img src="images/cybervehicle.png">
+<div class="info">
+<h2>Cyber Vehicle</h2>
+<p>Value : 10,000</p>
+<p class="price">200 Robux</p>
+</div>
+</div>
+
+<div class="card">
+<img src="images/bitcoinwallet.png">
+<div class="info">
+<h2>Bitcoin Wallet</h2>
+<p>Value : 5,000</p>
+<p class="price">100 Robux</p>
+</div>
+</div>
+
+<div class="card">
+<img src="images/pigwallet.png">
+<div class="info">
+<h2>Pig Wallet</h2>
+<p>Value : 4,000</p>
+<p class="price">80 Robux</p>
+</div>
+</div>
+
+<div class="card">
+<img src="images/soulknife.png">
+<div class="info">
+<h2>Soul Knife</h2>
+<p>Value : 3,500</p>
+<p class="price">70 Robux</p>
+</div>
+</div>
 
 </div>
 
-<!-- GAME PAGE -->
+<footer>
 
-<div id="games" class="page hidden">
+© 2026 Da Hood Shop
 
-<div class="games">
-
-<div class="card" onclick="openInfo()">
-
-<img src="https://i.ibb.co/PG4JLY65/Blox-Fruits.jpg">
-
-</div>
-
-<div class="card" onclick="openInfo()">
-
-<img src="https://i.ibb.co/Pzjv1n9p/blade-ball-roblox.avif">
-
-</div>
-
-<div class="card" onclick="openInfo()">
-
-<img src="https://i.ibb.co/NdKf6TMy/roblox-da-hood-codes-2.avif">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- INFO -->
-
-<div id="info" class="page hidden">
-
-<img class="infoImg" src="https://i.ibb.co/jkcy4jNz/The-Vault-PROJECT.jpg">
-
-<div class="instructions">
-
-Join our Discord server.<br>
-
-Go to the designated channel.<br>
-
-DM the manager to purchase or trade products.
-
-</div>
-
-<button class="neonBtn"
-
-onclick="window.location.href='https://discord.gg/CkjjFyX3cw'">
-
-Continue
-
-</button>
-
-</div>
-
-<script>
-
-function openGames(){
-
-home.classList.add("hidden");
-games.classList.remove("hidden");
-
-}
-
-function openInfo(){
-
-games.classList.add("hidden");
-info.classList.remove("hidden");
-
-}
-
-//////////////////////////////////////////////////////////
-// CONSTELLATION EFFECT
-//////////////////////////////////////////////////////////
-
-const canvas=document.getElementById("bg");
-
-const ctx=canvas.getContext("2d");
-
-let w=canvas.width=window.innerWidth;
-
-let h=canvas.height=window.innerHeight;
-
-window.onresize=()=>{
-
-w=canvas.width=window.innerWidth;
-h=canvas.height=window.innerHeight;
-
-}
-
-let mouse={x:w/2,y:h/2};
-
-window.onmousemove=e=>{
-
-mouse.x=e.clientX;
-mouse.y=e.clientY;
-
-}
-
-let pts=[];
-
-for(let i=0;i<45;i++){
-
-pts.push({
-
-x:mouse.x,
-
-y:mouse.y,
-
-vx:0,
-
-vy:0
-
-});
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,w,h);
-
-pts[0].x+=(mouse.x-pts[0].x)*0.25;
-pts[0].y+=(mouse.y-pts[0].y)*0.25;
-
-for(let i=1;i<pts.length;i++){
-
-pts[i].x+=(pts[i-1].x-pts[i].x)*0.35;
-pts[i].y+=(pts[i-1].y-pts[i].y)*0.35;
-
-}
-
-for(let i=0;i<pts.length;i++){
-
-ctx.beginPath();
-
-ctx.arc(pts[i].x,pts[i].y,2,0,6.28);
-
-ctx.fillStyle="white";
-
-ctx.shadowBlur=15;
-
-ctx.shadowColor="white";
-
-ctx.fill();
-
-}
-
-ctx.beginPath();
-
-ctx.strokeStyle="rgba(255,255,255,.45)";
-
-ctx.lineWidth=1;
-
-for(let i=0;i<pts.length;i++){
-
-ctx.lineTo(pts[i].x,pts[i].y);
-
-}
-
-ctx.stroke();
-
-requestAnimationFrame(animate);
-
-}
-
-animate();
-
-</script>
+</footer>
 
 </body>
 </html>
