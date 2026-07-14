@@ -1,358 +1,853 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Da Hood Market</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+<title>The Vault Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-body{
-background:#0b0d12;
-color:white;
-}
-
-header{
-
-height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-
-background:
-linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)),
-url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80");
-
-background-size:cover;
-background-position:center;
-
-text-align:center;
-
-}
-
-header h1{
-
-font-size:75px;
-
-color:#00ffcc;
-
-text-shadow:0 0 25px #00ffcc;
-
-}
-
-header p{
-
-margin-top:15px;
-
-font-size:22px;
-
-color:#ddd;
-
-}
-
-.buttons{
-
-margin-top:35px;
-
-display:flex;
-
-gap:20px;
-
-}
-
-.btn{
-
-padding:18px 35px;
-
-border-radius:12px;
-
-text-decoration:none;
-
-font-weight:bold;
-
-transition:.3s;
-
-}
-
-.discord{
-
-background:#5865F2;
-
-color:white;
-
-}
-
-.shop{
-
-background:#00ffcc;
-
-color:#111;
-
-}
-
-.btn:hover{
-
-transform:translateY(-5px);
-
-box-shadow:0 0 20px rgba(0,255,204,.5);
-
-}
-
-section{
-
-padding:80px;
-
-}
-
-.title{
-
-font-size:45px;
-
-margin-bottom:40px;
-
-text-align:center;
-
-color:#00ffcc;
-
-}
-
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-
-gap:30px;
-
-}
-
-.card{
-
-background:#161a22;
-
-border-radius:18px;
-
-overflow:hidden;
-
-transition:.35s;
-
-border:1px solid #222;
-
-}
-
-.card:hover{
-
-transform:translateY(-10px);
-
-box-shadow:0 0 30px rgba(0,255,204,.25);
-
-}
-
-.card img{
-
-width:100%;
-
-height:240px;
-
-object-fit:cover;
-
-}
-
-.info{
-
-padding:25px;
-
-}
-
-.item{
-
-font-size:26px;
-
-margin-bottom:12px;
-
-}
-
-.value{
-
-color:#8ef9d2;
-
-}
-
-.price{
-
-font-size:28px;
-
-font-weight:bold;
-
-margin-top:15px;
-
-color:#00ffcc;
-
-}
-
-.buy{
-
-display:block;
-
-margin-top:20px;
-
-background:#00ffcc;
-
-color:#111;
-
-padding:15px;
-
-text-align:center;
-
-border-radius:10px;
-
-text-decoration:none;
-
-font-weight:bold;
-
-}
-
-.buy:hover{
-
-background:white;
-
-}
-
-footer{
-
-padding:50px;
-
-text-align:center;
-
-background:#12151d;
-
-color:#888;
-
-}
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #e5e5e5;
+    --primary-glow: rgba(229,229,229,0.2);
+    --primary-dark: #ffffff;
+    --accent: #ffffff;
+    --bg-deep: #0a0a0a;
+    --bg-card: rgba(20,20,20,0.85);
+    --bg-card2: rgba(28,28,28,0.9);
+    --border: rgba(255,255,255,0.15);
+    --border-bright: rgba(255,255,255,0.45);
+    --text: #f2f2f2;
+    --muted: #b5b5b5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ─── ANIMATED BG ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,255,255,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 100% 80%, rgba(255,255,255,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 0% 100%, rgba(255,255,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* GRID LINES */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * { position: relative; z-index: 1; }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    background: rgba(10,10,10,0.7);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .logo span { color: white; }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--primary); }
+
+  /* ─── HERO ─── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+  }
+
+  .hero-img-wrap {
+    width: min(700px, 90vw);
+    aspect-ratio: 16/7;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-bright);
+    box-shadow: 0 0 60px rgba(255,255,255,0.1), 0 0 120px rgba(255,255,255,0.04);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* glow overlay on image */
+  .hero-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.8) 100%);
+  }
+
+  .hero h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 span { color: var(--primary); }
+
+  .hero p {
+    font-size: 1rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ─── NAV TABS ─── */
+  .tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .tab-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.75rem 2.2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-bright);
+    background: var(--bg-card);
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--primary);
+    color: var(--bg-deep);
+    border-color: var(--primary);
+    box-shadow: 0 0 24px var(--primary-glow);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { display: none; padding: 3rem 2rem 5rem; max-width: 1200px; margin: 0 auto; }
+  section.visible { display: block; }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title span { color: var(--primary); }
+
+  /* ─── PRODUCT GRID ─── */
+  .products-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .category-card {
+    flex: 1;
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .category-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(255,255,255,0.1);
+  }
+
+  .category-card .cat-banner {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: white;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-banner.paid {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 50%, #0a0a0a 100%);
+  }
+
+  .cat-banner.free {
+    background: linear-gradient(135deg, #0a0a0a 0%, #161616 50%, #0a0a0a 100%);
+  }
+
+  .cat-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.025) 20px,
+      rgba(255,255,255,0.025) 40px
+    );
+  }
+
+  .cat-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--primary);
+    color: var(--bg-deep);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .cat-badge.free-badge {
+    background: rgba(255,255,255,0.12);
+    color: var(--primary);
+    border: 1px solid var(--border-bright);
+  }
+
+  .category-card .cat-info {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .cat-info .cat-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+  }
+
+  .cat-info .cat-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .cat-price { color: var(--primary); font-weight: 700; }
+
+  /* ─── PRODUCT CARDS ─── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(255,255,255,0.08);
+  }
+
+  .product-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.7) 100%);
+  }
+
+  .product-info { padding: 1.1rem 1.2rem; flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .product-info h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .product-info p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .price-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+
+  .price-tag.free { color: #d4d4d4; }
+
+  .btn-view {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: var(--bg-deep);
+    background: var(--primary);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-view:hover {
+    background: white;
+    box-shadow: 0 0 16px var(--primary-glow);
+  }
+
+  .stock-badge {
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.08);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── DISCORD ─── */
+  .discord-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .discord-card {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.3s;
+  }
+
+  .discord-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(255,255,255,0.08);
+  }
+
+  .discord-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+  }
+
+  .discord-icon svg { width: 28px; height: 28px; fill: var(--primary); }
+
+  .discord-card h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .discord-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .btn-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--bg-deep);
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    padding: 0.65rem 1.5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: auto;
+    width: fit-content;
+  }
+
+  .btn-discord:hover {
+    background: white;
+    box-shadow: 0 0 24px var(--primary-glow);
+  }
+
+  /* ─── TRADING INFO ─── */
+  .rbx-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .rbx-hero img {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid var(--border-bright);
+    box-shadow: 0 0 40px rgba(255,255,255,0.1);
+  }
+
+  .rbx-text h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .rbx-text h2 span { color: var(--primary); }
+
+  .rbx-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-list { list-style: none; margin-bottom: 2rem; }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .feature-list li::before {
+    content: '▹';
+    color: var(--primary);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  footer span { color: var(--primary); }
+
+  /* ─── SCAN LINE ANIM ─── */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1rem; }
+    .products-header { flex-direction: column; }
+    .rbx-hero { grid-template-columns: 1fr; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<header>
+<div class="scanline"></div>
 
-<h1>DA HOOD MARKET</h1>
+<nav>
+  <a class="logo" href="#"><span>THE</span> VAULT</a>
+  <ul>
+    <li><a href="#" onclick="showSection('products')">Products</a></li>
+    <li><a href="#" onclick="showSection('discord')">Discord</a></li>
+    <li><a href="#" onclick="showSection('rbx')">Trading</a></li>
+  </ul>
+</nav>
 
-<p>Trusted Seller • Fast Delivery • Robux Only</p>
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-img-wrap">
+    <img src="https://i.ibb.co/zWjJ8WtL/the-vault-new-pp-banner.png" alt="The Vault Banner"
+         onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#0a0a0a,#1c1c1c)'; this.parentElement.innerHTML+='<span style=\'font-family:Rajdhani,sans-serif;font-size:2.5rem;font-weight:700;color:#e5e5e5;letter-spacing:4px;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;\'>THE VAULT PROJECT</span>'">
+  </div>
 
-<div class="buttons">
+  <h1><span>The</span> Vault Project</h1>
+  <p>YOUR ULTIMATE SOURCE FOR ROBLOX TRADING & ITEMS</p>
 
-<a class="btn discord" href="https://discord.gg/TONDISCORD">Join Discord</a>
-
-<a class="btn shop" href="#shop">View Shop</a>
-
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showSection('products')">⚡ Products</button>
+    <a class="tab-btn" href="https://discord.gg/CkjjFyX3cw" target="_blank">Discord Server</a>
+    <button class="tab-btn" onclick="showSection('rbx')">🎮 Trading</button>
+  </div>
 </div>
 
-</header>
+<!-- ─── PRODUCTS SECTION ─── -->
+<section id="products" class="visible">
+  <h2 class="section-title">Our <span>Products</span></h2>
 
-<section id="shop">
+  <!-- Categories -->
+  <div class="products-header">
+    <a class="category-card" href="https://discord.gg/CkjjFyX3cw" target="_blank">
+      <div class="cat-banner paid">
+        <span class="cat-badge">DISCORD LINK !</span>
+      </div>
+      <div class="cat-info">
+        <div class="cat-name">DISCORD — Click here</div>
+        <div class="cat-meta">
+          <span class="cat-price">JOIN NOW OUR TRADING SERVER !</span>
+          <span>0 Products</span>
+        </div>
+      </div>
+    </a>
 
-<h2 class="title">Featured Items</h2>
+    <a class="category-card" href="https://discord.gg/CkjjFyX3cw" target="_blank">
+      <div class="cat-banner free">
+        <span class="cat-badge free-badge">ROBLOX CREW !</span>
+      </div>
+      <div class="cat-info">
+        <div class="cat-name">LINK ROBLOX — Click here</div>
+        <div class="cat-meta">
+          <span class="cat-price">JOIN NOW OUR ROBLOX CREW !</span>
+          <span>0 Products</span>
+        </div>
+      </div>
+    </a>
+  </div>
 
-<div class="grid">
+  <!-- Product Cards -->
+  <div class="product-grid">
 
-<div class="card">
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<img src="images/cybervehicle.png">
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="info">
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="item">Cyber Vehicle</div>
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="value">Value : 10,000</div>
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="price">200 Robux</div>
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="No product">
+      </div>
+      <div class="product-info">
+        <h3>No product</h3>
+        <p>No product is added , come back later</p>
+        <div class="product-footer">
+          <span class="price-tag free">$0.00</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="stock-badge">0 Stock</span>
+            <a class="btn-view" href="https://discord.gg/CkjjFyX3cw" target="_blank">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<a class="buy" href="https://discord.gg/TONDISCORD">Buy Now</a>
+  </div>
+</section>
 
-</div>
+<!-- ─── DISCORD SECTION ─── -->
+<section id="discord">
+  <h2 class="section-title">Our <span>Discord Servers</span></h2>
+  <div class="discord-grid">
 
-</div>
+    <div class="discord-card">
+      <div class="discord-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+        </svg>
+      </div>
+      <h3>The Vault — Main Server</h3>
+      <p>Join the main The Vault Discord server. Get access to trading, item exchanges, support, and updates directly.</p>
+      <a class="btn-discord" href="https://discord.gg/CkjjFyX3cw" target="_blank">
+        Join Server →
+      </a>
+    </div>
 
-<div class="card">
+    <div class="discord-card">
+      <div class="discord-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+        </svg>
+      </div>
+      <h3>Trading & Items</h3>
+      <p>Dedicated server for Roblox item trading. Find the best deals and trusted traders in our community.</p>
+      <a class="btn-discord" href="https://discord.gg/CkjjFyX3cw" target="_blank">
+        Join Server →
+      </a>
+    </div>
 
-<img src="images/bitcoinwallet.png">
+  </div>
+</section>
 
-<div class="info">
-
-<div class="item">Bitcoin Wallet</div>
-
-<div class="value">Value : 5,000</div>
-
-<div class="price">100 Robux</div>
-
-<a class="buy" href="https://discord.gg/TONDISCORD">Buy Now</a>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="images/pigwallet.png">
-
-<div class="info">
-
-<div class="item">Pig Wallet</div>
-
-<div class="value">Value : 4,000</div>
-
-<div class="price">80 Robux</div>
-
-<a class="buy" href="https://discord.gg/TONDISCORD">Buy Now</a>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="images/soulknife.png">
-
-<div class="info">
-
-<div class="item">Soul Knife</div>
-
-<div class="value">Value : 3,500</div>
-
-<div class="price">70 Robux</div>
-
-<a class="buy" href="https://discord.gg/TONDISCORD">Buy Now</a>
-
-</div>
-
-</div>
-
-</div>
-
+<!-- ─── TRADING SECTION ─── -->
+<section id="rbx">
+  <h2 class="section-title">Roblox <span>Trading</span></h2>
+  <div class="rbx-hero">
+    <div>
+      <img src="https://i.ibb.co/9HcyTG8P/window-operating-system-error-warning-dialog-window-popup-message-with-system-failure-flat-design-81.avif" alt="Trading Preview">
+    </div>
+    <div class="rbx-text">
+      <h2>Trusted <span>Roblox</span> Trading</h2>
+      <p>We trade and sell Roblox items directly. Our community values trust and fair deals so you always know what you're getting.</p>
+      <ul class="feature-list">
+        <li>Items updated regularly</li>
+        <li>Fair and transparent trading</li>
+        <li>Active support community on Discord</li>
+        <li>Fast delivery — instant access</li>
+        <li>Trusted trader system</li>
+      </ul>
+      <a class="btn-discord" href="https://discord.gg/CkjjFyX3cw" target="_blank">
+        Join Trading Discord →
+      </a>
+    </div>
+  </div>
 </section>
 
 <footer>
-
-© 2026 Da Hood Market
-
+  <p>© 2026 <span>The Vault Project</span> — All rights reserved</p>
 </footer>
 
-</body>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('visible');
+    const idx = ['products','discord','rbx'].indexOf(id);
+    const btns = document.querySelectorAll('.tab-btn');
+    if (btns[idx]) btns[idx].classList.add('active');
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
+  document.querySelectorAll('nav ul a').forEach((a, i) => {
+    const sections = ['products','discord','rbx'];
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      showSection(sections[i]);
+    });
+  });
+</script>
+</body>
 </html>
-```
